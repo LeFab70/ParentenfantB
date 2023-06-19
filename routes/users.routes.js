@@ -3,7 +3,12 @@ const route = express.Router();
 const usersControllers = require("../controllers/users.controllers");
 
 /* differentes routes dans users */
-
+route.use((req, res, next) => {
+  const event = new Date().toString();
+  console.log("User time : ", event);
+  console.log(req.url, req.method);
+  next();
+});
 route.get("", usersControllers.getAllUsers);
 route.get("/:id", usersControllers.getOneUser);
 route.put("", usersControllers.createUser);

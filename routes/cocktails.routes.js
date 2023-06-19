@@ -1,14 +1,20 @@
-const express = require("express");
-const route = express.Router();
-const cocktailControllers = require("../controllers/cocktails.controllers");
+// const express = require("express");
+// const route = express.Router();
+// const cocktailControllers = require("../controllers/cocktails.controllers");
+// const checkToken = require("../middlewares/checktoken");
+// /* differentes routes dans users */
 
-/* differentes routes dans users */
+// /*** Middleware pour logger dates de requete */
+// route.use((req, res, next) => {
+//   const event = new Date();
+//   console.log("Cocktail Time:", event.toString());
+//   next();
+// });
+// route.get("", cocktailControllers.getAllCocktails);
+// route.get("/:id", cocktailControllers.getOneCocktail);
+// route.put("", checkToken, cocktailControllers.createCocktail);
+// route.patch("/:id", checkToken, cocktailControllers.alterCocktail);
+// route.delete("/:id",checkToken, cocktailControllers.deleteCocktail);
+// route.post("/restore/:id", checkToken, cocktailControllers.restoreCocktail);
 
-//route.get("", usersControllers.getAllUser);
-route.get("/:id", cocktailControllers.getOneCocktail);
-// route.post("", usersControllers.createUser);
-// route.patch("/:id", usersControllers.alterUser);
-// route.delete("/:id", usersControllers.deleteUser);
-// route.post("restore/:id", usersControllers.restoreUser);
-
-module.exports = route;
+// module.exports = route;
