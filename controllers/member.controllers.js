@@ -189,3 +189,29 @@ exports.getAllMembers = async (req, res, next) => {
     res.status(500).json({ message: "error in DB", error: error.message });
   }
 };
+//delete member
+exports.deleteMember = async (req, res, next) => {
+  try {
+    const idMember = (req.params.id);
+    console.log(idMember)
+    if (!idMember) throw new ParametersError("Missing parameters"); //return res.status(400).json({ message: "Missing parameter" });
+    let member = await memberModel.findOne({
+      where: {Id_member: idMember },
+      raw: true,
+    });
+    if (member === null)
+      //throw new UsersError("data sur le volet introuvable", 0);
+      return res.status(404).json({ message: "member introuvable" });
+    member = await memberModel.destroy({
+      where: { Id_member: idMember },
+      //force:true /// ce parametre permettra de supprimer definitive
+    });
+    //res.status(200).json({ message: "user delete" });
+    //on aurait mis le 204 pour dire que tout c bien passe
+    res.status(204).json(); //avec le json vide
+  } catch (error) {
+    // console.log(error);
+    // res.status(500).json({ message: "error in DB", error: error });
+    res.status(500).json({ message: "error in DB", error: error.message });
+  }
+};

@@ -29,12 +29,12 @@ exports.saveMemberToPeriod = async (req, res, next) => {
 
     if (volet !== null)
       return res.status(409).json({
-        message: "Membre deja cree dans la base de donnees avec ce label",
+        message: "Membre deja cree dans la base de donnees",
       });
 
     volet = await hasMemberModel.create(oneVolet);
     res.status(201).json({
-      message: "membre  crée pour lannee encours",
+      message: "membre  crée pour l'annee encours",
       data: {
         Id_period,
         Id_member,

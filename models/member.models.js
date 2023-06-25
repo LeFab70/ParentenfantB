@@ -87,15 +87,15 @@ module.exports = (sequelize) => {
       email_member: {
         type: DataTypes.STRING(200),
         // allowNull: false,
-        validate: {
-          isEmail: "la valeur fournir doit-etre une adresse mail",
-          // notNull: {
-          //   msg: `fournir l'email de la personne A contacter en cas d'urgence`,
-          // },
-          // notEmpty: {
-          //   msg: `fournir l'email de la personne`,
-          // },
-        },
+        // validate: {
+        //   isEmail: "la valeur fournir doit-etre une adresse mail",
+        //   // notNull: {
+        //   //   msg: `fournir l'email de la personne A contacter en cas d'urgence`,
+        //   // },
+        //   // notEmpty: {
+        //   //   msg: `fournir l'email de la personne`,
+        //   // },
+        // },
       },
       phone_member: {
         type: DataTypes.STRING(200),
@@ -121,7 +121,7 @@ module.exports = (sequelize) => {
         // },
 
         //allowNull: true,
-        defaultValue: "Nucléaire",
+        //defaultValue: "Nucléaire",
         // validate: {
         //   typeOfFamily() {
         //     if (this.id_parent !== null)
@@ -141,30 +141,30 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER(10),
         allowNull: true,
         default: 0,
-        validate: {
-          //notEmpty: { msg: "nombre d'enfants maison Données non fournies !!" },
-          isInt: { msg: "la valeur doit-etre un entier naturel" },
-        },
+        // validate: {
+        //   //notEmpty: { msg: "nombre d'enfants maison Données non fournies !!" },
+        //   isInt: { msg: "la valeur doit-etre un entier naturel" },
+        // },
       },
       number_children_carrefour: {
         type: DataTypes.INTEGER(10),
         allowNull: true,
         default: 0,
-        validate: {
-          // notEmpty: {
-          //   msg: "nombre d'enfants carrefour Données non fournies !!",
-          // },
-          isInt: { msg: "la valeur doit-etre un entier naturel" },
-        },
+        // validate: {
+        //   // notEmpty: {
+        //   //   msg: "nombre d'enfants carrefour Données non fournies !!",
+        //   // },
+        //   isInt: { msg: "la valeur doit-etre un entier naturel" },
+        // },
       },
       number_adult: {
         type: DataTypes.INTEGER(10),
         allowNull: true,
         default: 0,
-        validate: {
-          //notEmpty: { msg: "nombre d'aldutes Données non fournies !!" },
-          isInt: { msg: "la valeur doit-etre un entier naturel" },
-        },
+        // validate: {
+        //   //notEmpty: { msg: "nombre d'aldutes Données non fournies !!" },
+        //   isInt: { msg: "la valeur doit-etre un entier naturel" },
+        // },
       },
       how_know_us: {
         type: DataTypes.STRING(200),
@@ -252,17 +252,17 @@ module.exports = (sequelize) => {
       },
       paid_card: {
         type: DataTypes.STRING(10),
-        //allowNull: false,
+        allowNull: true,
         defaultValue: "non",
-        validate: {
-          isIn: {
-            args: [["oui", "non"]],
-            msg: "la valeur des infos sur le payement de la carte doit-etre fournie A oui ou non",
-          },
-          // notNull: {
-          //   msg: `Carte paye ou non?`,
-          // },
-        },
+        // validate: {
+        //   isIn: {
+        //     args: [["oui", "non"]],
+        //     msg: "la valeur des infos sur le payement de la carte doit-etre fournie A oui ou non",
+        //   },
+        // notNull: {
+        //   msg: `Carte paye ou non?`,
+        // },
+        //},
       },
 
       fname: {
@@ -304,7 +304,7 @@ module.exports = (sequelize) => {
       },
       group_of_age: {
         type: DataTypes.STRING(200),
-        // allowNull: false,
+         allowNull: true,
         // validate: {
         //   // notNull: {
         //   //   msg: `fournir le niveau scolaire de la personne `,
@@ -329,22 +329,23 @@ module.exports = (sequelize) => {
       birthday_child: {
         type: DataTypes.DATE,
         allowNull: true,
+        default: new Date(),
         isDate: true,
-        validate: {
-          //   notNull: {
-          //     msg: `fournir la date de naissance`,
-          //   },
-          customValidator(value) {
-            if (new Date(value) > new Date()) {
-              throw new Error("invalid date");
-            }
-          },
-        },
+        // validate: {
+        //   //   notNull: {
+        //   //     msg: `fournir la date de naissance`,
+        //   //   },
+        //   customValidator(value) {
+        //     if (new Date(value) > new Date()) {
+        //       throw new Error("invalid date");
+        //     }
+        //   },
+        // },
       },
 
       numberHealth: {
         type: DataTypes.STRING(200),
-        ///allowNull: false,
+        allowNull: true,
         // validate: {
         //   notNull: {
         //     msg: `fournir la carte sante`,
@@ -359,6 +360,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         //allowNull: false,
         isDate: true,
+        default:new Date(),
         // validate: {
         //   notNull: {
         //     msg: `fournir la date de expiration de la carte sante`,
@@ -489,16 +491,16 @@ module.exports = (sequelize) => {
 
       eat_alone: {
         type: DataTypes.STRING(10),
-        //allowNull: false,
-        validate: {
-          isIn: {
-            args: [["oui", "non"]],
-            msg: "la valeur des infos sur le repas doit-etre fournie A oui ou non",
-          },
-          // notNull: {
-          //   msg: `Votre enfant mange-t-il seul?`,
-          // },
-        },
+        allowNull: true,
+        // validate: {
+        //   isIn: {
+        //     args: [["oui", "non"]],
+        //     msg: "la valeur des infos sur le repas doit-etre fournie A oui ou non",
+        //   },
+        // notNull: {
+        //   msg: `Votre enfant mange-t-il seul?`,
+        // },
+        //},
       },
       sourceRevenue: {
         type: DataTypes.STRING(200),
@@ -554,21 +556,21 @@ module.exports = (sequelize) => {
       parent_tuteur: {
         ///il ne peut y avoir qu'un seul tuteur
         type: DataTypes.STRING(10),
-        //allowNull: false,
+        allowNull: true,
         defaultValue: "non",
-        validate: {
-          isIn: {
-            args: [["oui", "non"]],
-            msg: "la valeur du tuteur doit-etre oui ou non",
-          },
-        },
+        // validate: {
+        //   isIn: {
+        //     args: [["oui", "non"]],
+        //     msg: "la valeur du tuteur doit-etre oui ou non",
+        //   },
+        // },
       },
 
       type_of_member: {
         ///il ne peut y avoir qu'un seul tuteur
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(50),
         allowNull: false,
-        // defaultValue: "FAMILLE",
+        defaultValue: "famille",
         // validate: {
         //   isIn: {
         //     args: [

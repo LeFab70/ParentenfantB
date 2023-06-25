@@ -13,7 +13,7 @@ route.get("", membersControllers.getAllMembers);
 //route.get("/:id", usersControllers.getOneUser);
 route.put("", membersControllers.createMember);
 //route.patch("/:id", usersControllers.alterUser);
-//route.delete("/:id", usersControllers.deleteUser);
+route.delete("/:id", membersControllers.deleteMember);
 //route.post("/restore/:id", usersControllers.restoreUser);
 
 module.exports = route;
