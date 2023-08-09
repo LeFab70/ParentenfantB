@@ -14,8 +14,8 @@ module.exports = (sequelize) => {
 
       Id_role: {
         type: DataTypes.INTEGER(255),
-        allowNull: false,
-        unique: true,
+        // allowNull: false,
+        // unique: true,
         //autoIncrement: true,
       },
       name: {
@@ -38,6 +38,17 @@ module.exports = (sequelize) => {
           },
         },
       },
+      role: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        //   validate: {
+        //     is: /^[0-9a-f]{64}$/i,
+        //    // notNull: {
+        //      // msg: "Please enter your password",
+        //     //}, //le mot de passe doit comprendre les chifre et lettre sur 64 caract max
+        //   },
+      },
+
       password: {
         type: DataTypes.STRING(64),
         allowNull: false,

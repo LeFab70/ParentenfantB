@@ -304,7 +304,7 @@ module.exports = (sequelize) => {
       },
       group_of_age: {
         type: DataTypes.STRING(200),
-         allowNull: true,
+        allowNull: true,
         // validate: {
         //   // notNull: {
         //   //   msg: `fournir le niveau scolaire de la personne `,
@@ -360,7 +360,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         //allowNull: false,
         isDate: true,
-        default:new Date(),
+        default: new Date(),
         // validate: {
         //   notNull: {
         //     msg: `fournir la date de expiration de la carte sante`,
@@ -517,15 +517,15 @@ module.exports = (sequelize) => {
 
       language: {
         type: DataTypes.STRING(200),
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: `fournir la langue parlee`,
-          },
-          notEmpty: {
-            msg: `fournir la langue parlee`,
-          },
-        },
+        allowNull: true,
+        // validate: {
+        //   notNull: {
+        //     msg: `fournir la langue parlee`,
+        //   },
+        //   notEmpty: {
+        //     msg: `fournir la langue parlee`,
+        //   },
+        // },
       },
 
       origineEthnique: {

@@ -33,7 +33,6 @@ exports.authentificate = async (req, res, next) => {
       return res.status(400).json({ message: "Missing parameter" });
 
     const user = await userModel.findOne({
-      
       where: { pseudo: pseudo },
       raw: true,
     });
@@ -58,9 +57,13 @@ exports.authentificate = async (req, res, next) => {
     const refreshtoken = refreshToken(user.name);
     // { algorithm: "RS256" }
     //console.log(refreshtoken)
-    return res
-      .status(200)
-      .json({ user:user.name,access_token: tokenUser, refresh_token: refreshtoken });
+    return res.status(200).json({
+      user: user.name,
+      access_token: tokenUser,
+      refresh_token: refreshtoken,
+      role: user.role,
+      status: user.status,
+    });
   } catch (error) {
     next(error);
     // console.log(error);

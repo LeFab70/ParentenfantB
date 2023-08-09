@@ -11,6 +11,7 @@ exports.getAllUsers = async (req, res, next) => {
         "id",
         "name",
         "pseudo",
+        "role",
         "status",
         "createdAt",
         "updatedAt",
@@ -35,12 +36,13 @@ exports.getOneUser = async (req, res, next) => {
         "id",
         "name",
         "pseudo",
+        "role",
         "status",
         "createdAt",
         "updatedAt",
         "deletedAt",
       ],
-      where: { id: idUser },
+      where: { Id: idUser },
       raw: true,
     });
     if (user === null)
@@ -66,14 +68,14 @@ exports.getOneUser = async (req, res, next) => {
 //tester si le req a des donnees et recreeer lobjet avant de save/create
 exports.createUser = async (req, res, next) => {
   try {
-    
-    const { name, pseudo, password, status,Id_role } = req.body;
+    const { name, pseudo, password, status, Id_role, role } = req.body;
     const oneUser = {
       name,
       pseudo,
       password,
       status,
-      Id_role
+      Id_role,
+      role,
     };
     // tester si on a fournir les parametres et retourner erreur si non
     // const isEmpty =
@@ -113,7 +115,13 @@ exports.createUser = async (req, res, next) => {
     user = await userModel.create(oneUser);
     res.status(201).json({
       message: "user crée",
-      data: { name: user.name, status: user.status, pseudo: user.pseudo,role:user.Id_role },
+      data: {
+        name: user.name,
+        status: user.status,
+        pseudo: user.pseudo,
+        role: user.role,
+        Id_role: user.Id_role,
+      },
     });
   } catch (error) {
     // console.log(error);
@@ -122,13 +130,11 @@ exports.createUser = async (req, res, next) => {
   }
 };
 
-
-
 exports.alterUser = async (req, res, next) => {
   try {
     const idUser = parseInt(req.params.id);
     if (!idUser) throw new ParametersError("Missing parameters"); //return res.status(400).json({ message: "Missing parameter" });
-    let resp = await userModel.findOne({ where: { id: idUser }, raw: true });
+    let resp = await userModel.findOne({ where: { Id: idUser }, raw: true });
     if (resp === null)
       //return res.status(404).json({ message: "utilisateur introuvable" });
       throw new UsersError("data sur l'utilisateur introuvable", 0);
@@ -136,11 +142,13 @@ exports.alterUser = async (req, res, next) => {
     if (req.body.name) oneUser.name = req.body.name;
     if (req.body.email) oneUser.email = req.body.email;
     if (req.body.pseudo) oneUser.pseudo = req.body.pseudo;
-    // if(req.body.password) oneUser.name=req.body.password
+    //if (req.body.password) oneUser.password = req.body.password;
+    //nb penser a hasher le mot de passe a nouveau
+    if (req.body.status) oneUser.status = req.body.status;
 
     // tester si lemqil ou le pseudo existe deja
     ///////////////////////////////// TAF
-    resp = await userModel.update(oneUser, { where: { id: idUser } });
+    resp = await userModel.update(oneUser, { where: { Id: idUser } });
     //.then((user) =>
     return res.status(201).json({ data: resp, message: "user update" });
     // .catch((err) =>
@@ -158,12 +166,12 @@ exports.deleteUser = async (req, res, next) => {
   try {
     const idUser = parseInt(req.params.id);
     if (!idUser) throw new ParametersError("Missing parameters"); //return res.status(400).json({ message: "Missing parameter" });
-    let user = await userModel.findOne({ where: { id: idUser }, raw: true });
+    let user = await userModel.findOne({ where: { Id: idUser }, raw: true });
     if (user === null)
       throw new UsersError("data sur l'utilisateur introuvable", 0);
     // return res.status(404).json({ message: "utilisateur introuvable" });
     user = await userModel.destroy({
-      where: { id: idUser },
+      where: { Id: idUser },
       //force:true /// ce parametre permettra de supprimer definitive
     });
     //res.status(200).json({ message: "user delete" });
