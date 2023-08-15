@@ -9,7 +9,7 @@ route.use((req, res, next) => {
   console.log(req.url, req.method);
   next();
 });
-//route.get("", membersControllers.getAllMembers);
+route.get("", hasMemberControllers.getAllHasMember);
 //route.get("/:id", usersControllers.getOneUser);
 route.put("", hasMemberControllers.saveMemberToPeriod);
 //route.patch("/:id", usersControllers.alterUser);

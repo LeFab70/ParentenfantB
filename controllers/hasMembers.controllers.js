@@ -47,3 +47,13 @@ exports.saveMemberToPeriod = async (req, res, next) => {
     //next(error);
   }
 };
+//display periods
+exports.getAllHasMember = async (req, res, next) => {
+  try {
+    const hasMember = await hasMemberModel.findAll();
+    if (hasMember === null) throw new UsersError("no data");
+    res.status(200).json({ data: hasMember });
+  } catch (err) {
+    res.status(500).json({ message: "error in DB", error: err.message });
+  }
+};
