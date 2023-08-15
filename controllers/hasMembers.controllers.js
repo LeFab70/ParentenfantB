@@ -1,5 +1,7 @@
 const db = require("../db.config");
+//const voletModels = require("../models/volet.models");
 const hasMemberModel = db.HasMember;
+const voletModel = db.Volet;
 //created volets
 exports.saveMemberToPeriod = async (req, res, next) => {
   try {
@@ -50,7 +52,15 @@ exports.saveMemberToPeriod = async (req, res, next) => {
 //display periods
 exports.getAllHasMember = async (req, res, next) => {
   try {
-    const hasMember = await hasMemberModel.findAll();
+    const hasMember = await hasMemberModel.findAll({
+      attributes: ["Id_volet", "Id_period", "Id_member"],
+      include: [
+        {
+          model: voletModel,
+          attributes: ["label_volet", "description_volet"],
+        },
+      ],
+    });
     if (hasMember === null) throw new UsersError("no data");
     res.status(200).json({ data: hasMember });
   } catch (err) {
